@@ -24,17 +24,11 @@
       --surface-elevated: 220 15% 98%; /* Slightly off-white */
       --text-primary: 220 15% 15%;     /* Very dark gray */
       --text-secondary: 220 10% 45%;   /* Medium gray */
-      /* Use HSL token form so callers can use hsl(var(--text-muted)) */
-      --text-muted: 220 10% 45%;       /* Muted gray */
+      --text-muted: #ffffff;       /* Light gray */
       --border: 220 15% 88%;           /* Light border */
       --border-light: 220 15% 92%;     /* Very light border */
       --success: 145 60% 45%;          /* Muted green */
-      /* Enhanced shadows for depth */
-      --shadow-sm: 0 2px 4px -2px rgba(0, 0, 0, 0.05), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      --glass-bg: rgba(255, 255, 255, 0.7);
-      --glass-border: rgba(255, 255, 255, 0.12);
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
     }
 
     @media (prefers-color-scheme: dark) {
@@ -121,32 +115,24 @@
       display: flex;
       flex-direction: column;
       width: 100%;
-      /* Slightly wider for desktop comfort */
-      max-width: 560px;
+      max-width: 420px;
       height: 85vh;
       max-height: 650px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: hsl(var(--surface));
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: var(--shadow-lg);
-      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow);
+      border: 1px solid hsl(var(--border));
     }
 
     /* Header */
     .chat-header {
-      background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 100%);
+      background: hsl(var(--primary));
       color: white;
-      padding: 16px 20px;
+      padding: 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      /* Subtle divider to feel like a desktop toolbar */
-      border-bottom: 1px solid var(--glass-border);
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      z-index: 2;
     }
 
     .chat-title {
@@ -155,27 +141,21 @@
     }
 
     .status {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.9);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.8);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       font-weight: 500;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 6px 12px;
-      border-radius: 16px;
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
     }
 
     .status::before {
       content: '';
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       background: hsl(var(--success));
       border-radius: 50%;
       animation: pulse 2s infinite;
-      box-shadow: 0 0 0 4px rgba(var(--success), 0.2);
     }
 
     /* Chat area */
@@ -223,7 +203,6 @@
       flex-direction: column;
       gap: 4px;
       transition: all 0.2s ease;
-      color: hsl(var(--text-primary)); /* Default text color for all messages */
     }
 
     .msg:hover {
@@ -253,7 +232,7 @@
 
     .User1 .msg {
       background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 100%);
-      color: #ffffff !important; /* Force white text for User1 messages */
+      color: white; /* restore original white text without !important */
       border-bottom-right-radius: 4px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
@@ -281,13 +260,13 @@
 
     /* Avatar */
     .avatar {
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       color: white;
       margin: 0 8px;
@@ -310,28 +289,23 @@
 
     /* Controls */
     #controls {
-      background: var(--glass-bg);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: hsl(var(--surface));
       padding: 16px;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      border-top: 1px solid var(--glass-border);
-      position: relative;
-      z-index: 2;
+      border-top: 1px solid hsl(var(--border));
     }
 
     #userSelect {
-      padding: 12px 16px;
-      border-radius: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
       border: 1px solid hsl(var(--border));
       font-size: 14px;
       background: hsl(var(--surface-elevated));
       color: hsl(var(--text-primary));
       font-weight: 500;
       transition: all 0.2s ease;
-      box-shadow: var(--shadow-sm);
     }
 
     #userSelect:focus {
@@ -354,7 +328,6 @@
       outline: none;
       font-size: 14px;
       background: hsl(var(--surface-elevated));
-      /* Use theme-aware primary text so it adapts to light/dark */
       color: hsl(var(--text-primary));
       font-family: inherit;
       transition: all 0.2s ease;
@@ -366,30 +339,49 @@
     }
 
     #msg::placeholder {
-      /* Use theme-aware muted text for placeholder so it works in both schemes */
       color: hsl(var(--text-muted));
     }
 
-    /* Small desktop polish for the overall chat area */
+    /* Ensure input text is white in dark mode for visibility */
+    @media (prefers-color-scheme: dark) {
+      #msg {
+        color: #ffffff;
+      }
+
+      #msg::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+      /* Make User2 (left) message text white in dark mode for contrast */
+      .User2 .msg {
+        color: #ffffff;
+      }
+
+      .User2 .timestamp {
+        color: rgba(255,255,255,0.7);
+      }
+      /* Ensure system messages are readable */
+      .system-message { color: rgba(255,255,255,0.85); }
+    }
+
+    /* Responsive tweak */
     .msg { 
-      font-size: 15px; 
+      font-size: 14px; 
     }
 
     .send-button {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border: none;
       background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 100%);
       color: white;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: var(--shadow-md);
-      margin-left: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     }
 
     .send-button:hover {
@@ -405,16 +397,13 @@
     .emoji-bar {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      padding: 14px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-radius: 12px;
-      border: 1px solid var(--glass-border);
-      max-height: 120px;
+      gap: 4px;
+      padding: 12px;
+      background: hsl(var(--surface-elevated));
+      border-radius: 8px;
+      border: 1px solid hsl(var(--border-light));
+      max-height: 100px;
       overflow-y: auto;
-      box-shadow: var(--shadow-sm);
     }
 
     .emoji {
@@ -693,6 +682,13 @@
 
       bubble.appendChild(content);
       bubble.appendChild(time);
+
+      // Ensure message text is visible in dark-mode environments.
+      // If the user prefers a dark color scheme, force light text on message bubbles.
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        bubble.style.color = '#ffffff';
+        time.style.color = 'rgba(255,255,255,0.7)';
+      }
 
       const avatar = document.createElement("div");
       avatar.className = "avatar " + user;

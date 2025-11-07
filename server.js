@@ -3,7 +3,7 @@ const path = require("path");
 const WebSocket = require("ws");
 
 const app = express();
-const PORT = 3000;
+const PORT = 4000;
 
 // serve static files from /public
 app.use(express.static(path.join(__dirname, "public")));
